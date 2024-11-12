@@ -24,13 +24,30 @@ class UsuarioService:
             for usuario in usuarios:
                 print(usuario.to_dict())
 
-    # Pesquisar um usuário por id
-    def pesquisar_usuario(self, usuario_id: int):
+    # Pesquisar um usuário por ID
+    def pesquisar_usuario_por_id(self, usuario_id: int):
         usuario = self.repository.pesquisar_usuario_por_id(usuario_id)
         if usuario:
             print(usuario.to_dict())
         else:
             print("Usuário não encontrado.")
+
+    # Pesquisar um usuário por nome
+    def pesquisar_usuario_por_nome(self, nome: str):
+        usuarios = self.repository.pesquisar_usuario_por_nome(nome)
+        if usuarios:
+            for usuario in usuarios:
+                print(usuario.to_dict())
+        else:
+            print("Nenhum usuário encontrado com esse nome.")
+
+    # Pesquisar um usuário por email
+    def pesquisar_usuario_por_email(self, email: str):
+        usuario = self.repository.pesquisar_usuario_por_email(email)
+        if usuario:
+            print(usuario.to_dict())
+        else:
+            print("Usuário não encontrado com esse email.")
 
     # Atualizar dados de um usuário
     def atualizar_usuario(self, usuario_id: int, nome: str = None, email: str = None, idade: int = None):

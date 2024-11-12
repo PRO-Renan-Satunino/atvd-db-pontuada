@@ -5,7 +5,7 @@ from services.usuario_services import UsuarioService
 def main():
     db = Session()
     usuario_repository = UsuarioRepository(db)
-    usuario_service = UsuarioService(usuario_repository)
+    usuario_services = UsuarioService(usuario_repository)
 
     while True:
         print("\n=== SENAI SOLUTION ===")
@@ -22,26 +22,41 @@ def main():
             nome = input("Nome do usuário: ")
             email = input("Email do usuário: ")
             idade = int(input("Idade do usuário: "))
-            usuario_service.criar_usuario(nome, email, idade)
+            usuario_services.criar_usuario(nome, email, idade)
 
         elif opcao == '2':
-            usuario_id = int(input("Informe o ID do usuário: "))
-            usuario_service.pesquisar_usuario(usuario_id)
+            print("Como você deseja pesquisar o usuário?")
+            print("1 - Por ID")
+            print("2 - Por Nome")
+            print("3 - Por Email")
+            pesquisa_opcao = input("Informe a opção desejada: ")
 
+            if pesquisa_opcao == '1':
+                usuario_id = int(input("Informe o ID do usuário: "))
+                usuario_services.pesquisar_usuario_por_id(usuario_id)
+            elif pesquisa_opcao == '2':
+                nome = input("Informe o nome do usuário: ")
+                usuario_services.pesquisar_usuario_por_nome(nome)
+            elif pesquisa_opcao == '3':
+                email = input("Informe o email do usuário: ")
+                usuario_services.pesquisar_usuario_por_email(email)
+            else:
+                print("Opção inválida!")
+                
         elif opcao == '3':
             usuario_id = int(input("Informe o ID do usuário a ser atualizado: "))
             nome = input("Novo nome (deixe vazio para não alterar): ")
             email = input("Novo email (deixe vazio para não alterar): ")
             idade = input("Nova idade (deixe vazio para não alterar): ")
             idade = int(idade) if idade else None
-            usuario_service.atualizar_usuario(usuario_id, nome, email, idade)
+            usuario_services.atualizar_usuario(usuario_id, nome, email, idade)
 
         elif opcao == '4':
             usuario_id = int(input("Informe o ID do usuário a ser excluído: "))
-            usuario_service.excluir_usuario(usuario_id)
+            usuario_services.excluir_usuario(usuario_id)
 
         elif opcao == '5':
-            usuario_service.listar_todos_usuarios()
+            usuario_services.listar_todos_usuarios()
 
         elif opcao == '0':
             print("Saindo...")

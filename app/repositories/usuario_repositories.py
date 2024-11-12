@@ -13,6 +13,10 @@ class UsuarioRepository:
     # Buscar usuário por email
     def pesquisar_usuario_por_email(self, email: str):
         return self.session.query(Usuario).filter_by(email=email).first()
+    
+     # Buscar usuário por nome
+    def pesquisar_usuario_por_nome(self, nome: str):
+        return self.session.query(Usuario).filter(Usuario.nome.ilike(f"%{nome}%")).all()
 
     # Deletar usuário
     def deletar_usuario(self, usuario_id: int):
