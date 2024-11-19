@@ -1,6 +1,7 @@
 from config.connection import Session
 from repositories.usuario_repositories import UsuarioRepository
 from services.usuario_services import UsuarioService
+import os
 
 def main():
     db = Session()
@@ -23,8 +24,10 @@ def main():
             email = input("Email do usuário: ")
             idade = int(input("Idade do usuário: "))
             usuario_services.criar_usuario(nome, email, idade)
+            os.system("clear || cls")
 
         elif opcao == '2':
+            os.system("clear || cls")
             print("Como você deseja pesquisar o usuário?")
             print("1 - Por ID")
             print("2 - Por Nome")
@@ -42,7 +45,8 @@ def main():
                 usuario_services.pesquisar_usuario_por_email(email)
             else:
                 print("Opção inválida!")
-                
+            
+
         elif opcao == '3':
             usuario_id = int(input("Informe o ID do usuário a ser atualizado: "))
             nome = input("Novo nome (deixe vazio para não alterar): ")
@@ -50,15 +54,19 @@ def main():
             idade = input("Nova idade (deixe vazio para não alterar): ")
             idade = int(idade) if idade else None
             usuario_services.atualizar_usuario(usuario_id, nome, email, idade)
+            os.system("clear || cls")
 
         elif opcao == '4':
             usuario_id = int(input("Informe o ID do usuário a ser excluído: "))
             usuario_services.excluir_usuario(usuario_id)
+            os.system("clear || cls")
 
         elif opcao == '5':
+            os.system("clear || cls")
             usuario_services.listar_todos_usuarios()
 
         elif opcao == '0':
+            os.system("clear || cls")
             print("Saindo...")
             break
         else:
